@@ -18,110 +18,73 @@ require_once $libraryDir . '/Detection/Classification/Typo3FingerprintProcessor.
 require_once $vendorDir . '/autoload.php';
 
 
-class Typo3HostDetectorWorker {
 
-	private $host;
-	private $port;
-	private $gearmanWorker;
+$worker = new GearmanWorker();
+$worker->addServer('gearman', 4730);
+$worker->addFunction('TYPO3HostDetector', 'fetchUrl');
+$worker->setTimeout(5000);
 
-
-	public function __construct($host = '127.0.0.1', $port = 4730) {
-		$this->host = $host;
-		$this->port = $port;
+while (1) {
+	try {
+		$worker->work();
+	} catch (Exception $e) {
+		fwrite(STDERR, sprintf('ERROR: Job-Worker: %s (Errno: %u)' . PHP_EOL, $e->getMessage(), $e->getCode()));
+		exit(1);
 	}
 
-	public function setUp() {
-		set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
-			// error was suppressed with the @-operator
-			if (0 === error_reporting()) {
-				return false;
-			}
-		
-			throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
-		});
-		
+	if ($worker->returnCode() == GEARMAN_TIMEOUT) {
+		//do some other work here
+		continue;
+	}
+	if ($worker->returnCode() != GEARMAN_SUCCESS) {
+		// do some error handling here
+		exit(1);
+	}
+}
 
-		try {
-			$adapter = new \TweeGearmanStat\Queue\Gearman(array(
-					'h1' => array('host' => $this->host, 'port' => $this->port, 'timeout' => 1),
-			));
-			$status = $adapter->status();
-		} catch (ErrorException $e) {	
-			fwrite(STDERR, sprintf('ERROR: Job-Server: %s (Errno: %u)' . PHP_EOL, $e->getMessage(), $e->getCode()));
-			die(1);
-		}
 
-		$this->gearmanWorker = new GearmanWorker();
-		$this->gearmanWorker->addServer($this->host, $this->port);
-		$this->gearmanWorker->addFunction('TYPO3HostDetector', array($this, 'fetchUrl'));
+function fetchUrl(GearmanJob $job) {
+	$result = array();
+
+	$context = new \T3census\Detection\Context();
+	$context->setUrl($job->workload());
+
+	$objTypo3Artefacts = new \T3census\Detection\Identification\Typo3ArtefactsProcessor(NULL, TRUE);
+	$objPathRedirect = new \T3census\Detection\Identification\FullPathProcessor($objTypo3Artefacts, TRUE);
+	$objPathNoRedirect = new \T3census\Detection\Identification\FullPathProcessor($objPathRedirect, FALSE);
+	$objHostRedirect = new \T3census\Detection\Identification\HostOnlyProcessor($objPathNoRedirect, TRUE);
+	$objHostNoRedirect = new \T3census\Detection\Identification\HostOnlyProcessor($objHostRedirect, FALSE);
+	$objRedirect = new \T3census\Detection\Normalization\RedirectProcessor($objHostNoRedirect);
+	$objShortener = new \T3census\Detection\Normalization\ShortenerRedirectOnlyProcessor($objRedirect);
+	$objShortener->process($context);
+	unset($objShortener, $objHostNoRedirect, $objHostNoRedirect, $objHostRedirect, $objPathNoRedirect, $objPathRedirect);
+
+	if (is_bool($context->getIsTypo3Cms()) && $context->getIsTypo3Cms()) {
+		$objFingerprint = new \T3census\Detection\Classification\Typo3FingerprintProcessor();
+		$objArtefacts = new \T3census\Detection\Classification\Typo3ArtefactsProcessor($objFingerprint);
+		$objFullPath = new \T3census\Detection\Classification\FullPathProcessor($objArtefacts);
+		$objHost = new \T3census\Detection\Classification\HostOnlyProcessor($objFullPath);
+		$objRequest = new \T3census\Detection\Classification\ExistingRequestsProcessor($objHost);
+		$objRequest->process($context);
+		unset($objRequest, $objHost);
 	}
 
-	public function tearDown() {
-		restore_error_handler();
-	}
+	$objUrl = new \Purl\Url($context->getUrl());
+	$result['ip'] = $context->getIp();
+	$result['port'] = $context->getPort();
+	$result['scheme'] = $objUrl->get('scheme');
+	$result['protocol'] = $objUrl->get('scheme') . '://';
+	$result['host'] = $objUrl->get('host');
+	$result['subdomain'] = $objUrl->get('subdomain');
+	$result['registerableDomain'] = $objUrl->get('registerableDomain');
+	$result['publicSuffix'] = $objUrl->get('publicSuffix');
+	$path = $objUrl->get('path')->getPath();
+	$result['path'] = (is_string($path) && strlen($path) > 0 && 0 !== strcmp('/', $path) ? $path : NULL);
+	$result['TYPO3'] = (is_bool($context->getIsTypo3Cms()) && $context->getIsTypo3Cms());
+	$result['TYPO3version'] = $context->getTypo3VersionString();
+	unset($objUrl, $context);
 
-	public function fetchUrl(GearmanJob $job) {
-		$result = array();
-
-		$context = new \T3census\Detection\Context();
-		$context->setUrl($job->workload());
-
-		$objTypo3Artefacts = new \T3census\Detection\Identification\Typo3ArtefactsProcessor(NULL, TRUE);
-		$objPathRedirect = new \T3census\Detection\Identification\FullPathProcessor($objTypo3Artefacts, TRUE);
-		$objPathNoRedirect = new \T3census\Detection\Identification\FullPathProcessor($objPathRedirect, FALSE);
-		$objHostRedirect = new \T3census\Detection\Identification\HostOnlyProcessor($objPathNoRedirect, TRUE);
-		$objHostNoRedirect = new \T3census\Detection\Identification\HostOnlyProcessor($objHostRedirect, FALSE);
-		$objRedirect = new \T3census\Detection\Normalization\RedirectProcessor($objHostNoRedirect);
-		$objShortener = new \T3census\Detection\Normalization\ShortenerRedirectOnlyProcessor($objRedirect);
-		$objShortener->process($context);
-		unset($objShortener, $objHostNoRedirect, $objHostNoRedirect, $objHostRedirect, $objPathNoRedirect, $objPathRedirect);
-
-		if (is_bool($context->getIsTypo3Cms()) && $context->getIsTypo3Cms()) {
-			$objFingerprint = new \T3census\Detection\Classification\Typo3FingerprintProcessor();
-			$objArtefacts = new \T3census\Detection\Classification\Typo3ArtefactsProcessor($objFingerprint);
-			$objFullPath = new \T3census\Detection\Classification\FullPathProcessor($objArtefacts);
-			$objHost = new \T3census\Detection\Classification\HostOnlyProcessor($objFullPath);
-			$objRequest = new \T3census\Detection\Classification\ExistingRequestsProcessor($objHost);
-			$objRequest->process($context);
-			unset($objRequest, $objHost);
-		}
-
-		$objUrl = new \Purl\Url($context->getUrl());
-		$result['ip'] = $context->getIp();
-		$result['port'] = $context->getPort();
-		$result['scheme'] = $objUrl->get('scheme');
-		$result['protocol'] = $objUrl->get('scheme') . '://';
-		$result['host'] = $objUrl->get('host');
-		$result['subdomain'] = $objUrl->get('subdomain');
-		$result['registerableDomain'] = $objUrl->get('registerableDomain');
-		$result['publicSuffix'] = $objUrl->get('publicSuffix');
-		$path = $objUrl->get('path')->getPath();
-		$result['path'] = (is_string($path) && strlen($path) > 0 && 0 !== strcmp('/', $path) ? $path : NULL);
-		$result['TYPO3'] = (is_bool($context->getIsTypo3Cms()) && $context->getIsTypo3Cms());
-		$result['TYPO3version'] = $context->getTypo3VersionString();
-		unset($objUrl, $context);
-
-		return json_encode($result);
-	}
-
-	public function run() {
-		$this->setUp();
-		$this->gearmanWorker->setTimeout(5000); //wake up after 5 seconds
-		fwrite(STDOUT, 'Starting...' . PHP_EOL);
-		while (1) {
-			$this->gearmanWorker->work();
-
-			if ($this->gearmanWorker->returnCode() == GEARMAN_TIMEOUT) {
-				//do some other work here
-				continue;
-			}
-			if ($this->gearmanWorker->returnCode() != GEARMAN_SUCCESS) {
-				// do some error handling here
-				die("An error occured");
-			}
-
-		}
-	}
+	return json_encode($result);
 }
 
 ?>
