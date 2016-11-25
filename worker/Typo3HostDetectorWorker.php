@@ -20,7 +20,7 @@ require_once $vendorDir . '/autoload.php';
 
 
 $worker = new GearmanWorker();
-$worker->addServer('gearman', 4730);
+$worker->addServer('127.0.0.1, 4730);
 $worker->addFunction('TYPO3HostDetector', 'fetchUrl');
 $worker->setTimeout(5000);
 
