@@ -22,6 +22,8 @@ class UrlFetcher {
 
 	protected $errno = 0;
 
+	protected $contentLength = 0;
+
 	protected $body = NULL;
 
 	protected $userAgent = 'T3census-Crawler/1.0 (+http://t3census.info/)';
@@ -124,6 +126,10 @@ class UrlFetcher {
 			$this->responseHttpCode = $curlInfo['http_code'];
 		}
 
+		if (is_array($curlInfo) && array_key_exists('download_content_length', $curlInfo)) {
+			$this->contentLength = intval($curlInfo['download_content_length']);
+		}
+
 		if (is_bool($followRedirects) && $followRedirects
 				&& is_array($curlInfo) && array_key_exists('redirect_count', $curlInfo)
 		) {
@@ -193,6 +199,13 @@ class UrlFetcher {
 	 */
 	public function getErrno() {
 		return $this->errno;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getContentLength() {
+		return $this->contentLength;
 	}
 
 	/**
