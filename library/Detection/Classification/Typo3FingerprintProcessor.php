@@ -59,6 +59,19 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 
 		$fingerprintData = array(
 			0 => array(
+				'TYPO3version' => 'TYPO3 8.2 CMS',
+				'filesize' => array(
+					array('typo3/sysext/backend/Resources/Public/Fonts/FontAwesome/fontawesome-webfont.ttf' => 152796),
+				)
+			),
+			1 => array(
+				'TYPO3version' => 'TYPO3 8.1 CMS',
+				'newFiles' => array(
+					'typo3/sysext/backend/Resources/Public/Images/cropper-background.png',
+					'typo3/sysext/install/Resources/Public/Images/bg_transparent_emulation.png'
+				)
+			),
+			2 => array(
 				'TYPO3version' => 'TYPO3 8.0 CMS',
 				'newFiles' => array(
 					'typo3/sysext/t3skin/extjs/images/tree/system-tree-search-open.png',
@@ -66,7 +79,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/sysext/form/Resources/Public/Images/module-menu-down.png'
 				)
 			),
-			1 => array(
+			3 => array(
 				'TYPO3version' => 'TYPO3 7.6 CMS',
 				'newFiles' => array(
 					'typo3/sysext/backend/Resources/Public/Images/clear.gif',
@@ -77,14 +90,14 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/sysext/backend/Resources/Public/Images/typo3-topbar@2x.png'
 				)
 			),
-			2 => array(
+			4 => array(
 				'TYPO3version' => 'TYPO3 7.3 CMS',
 				'newFiles' => array(
 					'typo3/sysext/t3skin/Resources/Public/Images/cropper-background.png',
 					'typo3/sysext/backend/Resources/Public/Images/BackendLayoutWizard/t3grid-layer-icon-close.png'
 				)
 			),
-			3 => array(
+			5 => array(
 				'TYPO3version' => 'TYPO3 7.0 CMS',
 				'newFiles' => array(
 					'typo3/contrib/jquery/jquery-1.11.1.js',
@@ -92,42 +105,42 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/contrib/swiftmailer/notes/rfc/rfc5751.txt'
 				)
 			),
-			4 => array(
+			6 => array(
 				'TYPO3version' => 'TYPO3 6.2 CMS',
 				'newFiles' => array(
 					'typo3/sysext/t3skin/Resources/Public/JavaScript/login.js',
 					'typo3/sysext/install/Resources/Public/Javascript/Install.js',
 				)
 			),
-			5 => array(
+			7 => array(
 				'TYPO3version' => 'TYPO3 6.1 CMS',
 				'newFiles' => array(
 					'typo3/contrib/requirejs/require.js',
 					'typo3/contrib/jquery/jquery-1.9.1.min.js',
 				)
 			),
-			6 => array(
+			8 => array(
 				'TYPO3version' => 'TYPO3 6.0 CMS',
 				'newFiles' => array(
 					'typo3/contrib/jquery/jquery-1.8.2.min.js',
 					'typo3/sysext/lang/Resources/Public/Contrib/jquery.dataTables-1.9.4.min.js',
 				)
 			),
-			7 => array(
+			9 => array(
 				'TYPO3version' => 'TYPO3 4.7 CMS',
 				'newFiles' => array(
 					'typo3/contrib/videojs/video-js/video.js',
 					'typo3/contrib/flowplayer/src/javascript/flowplayer.js/flowplayer-3.2.10.js',
 				)
 			),
-			8 => array(
+			10 => array(
 				'TYPO3version' => 'TYPO3 4.6 CMS',
 				'newFiles' => array(
 					'typo3/contrib/codemirror/contrib/scheme/js/parsescheme.js',
 					'typo3/sysext/css_styled_content/static/v4.5/setup.txt',
 				)
 			),
-			9 => array(
+			11 => array(
 				'TYPO3version' => 'TYPO3 4.5 CMS',
 				'newFiles' => array(
 					'typo3/js/livesearch.js',
@@ -136,7 +149,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/contrib/extjs/locale/ext-lang-am.js',
 				)
 			),
-			10 => array(
+			12 => array(
 				'TYPO3version' => 'TYPO3 4.4 CMS',
 				'newFiles' => array(
 					'typo3/js/pagetreefiltermenu.js',
@@ -144,7 +157,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/contrib/extjs/adapter/ext/ext-base-debug-w-comments.js',
 				)
 			),
-			11 => array(
+			13 => array(
 				'TYPO3version' => 'TYPO3 4.3 CMS',
 				'newFiles' => array(
 					't3lib/js/adminpanel.js',
@@ -153,7 +166,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/contrib/swfupload/swfupload.js',
 				)
 			),
-			12 => array(
+			14 => array(
 				'TYPO3version' => 'TYPO3 4.2 CMS',
 				'newFiles' => array(
 					'typo3/js/workspaces.js',
@@ -161,7 +174,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/templates/belog.html',
 				)
 			),
-			13 => array(
+			15 => array(
 				'TYPO3version' => 'TYPO3 4.1 CMS',
 				'newFiles' => array(
 					't3lib/jsfunc.inline.js',
@@ -170,7 +183,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/contrib/scriptaculous/scriptaculous.js',
 				)
 			),
-			14 => array(
+			16 => array(
 				'TYPO3version' => 'TYPO3 4.0 CMS',
 				'newFiles' => array(
 					'typo3/tab.js',
@@ -178,7 +191,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/sysext/cms/tslib/media/fileicons/folder.gif',
 				)
 			),
-			15 => array(
+			17 => array(
 				'TYPO3version' => 'TYPO3 3.8 CMS',
 				'newFiles' => array(
 					't3lib/gfx/up.gif',
@@ -186,7 +199,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/sysext/install/imgs/copyrights.txt',
 				)
 			),
-			16 => array(
+			18 => array(
 				'TYPO3version' => 'TYPO3 3.7 CMS',
 				'newFiles' => array(
 					'misc/locallang_XML_dummy.xml',
@@ -194,7 +207,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/mod/help/cshmanual/ext_icon.gif',
 				)
 			),
-			17 => array(
+			19 => array(
 				'TYPO3version' => 'TYPO3 3.6 CMS',
 				'newFiles' => array(
 					'misc/changes_in_typo3-ext.diff.txt',
@@ -207,32 +220,23 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 		$TYPO3version = NULL;
 
 		foreach ($fingerprintData as $data) {
-			foreach ($data['newFiles'] as $newFile) {
-				$objHostOnlyUrl = new \Purl\Url($urlHostOnly);
-				$objFullPathUrl = new \Purl\Url($urlFullPath);
-				$objHostOnlyUrl->path = $newFile;
-				$hostOnlyUrl = $objHostOnlyUrl->getUrl();
+			if (isset($data['newFiles'])) {
+				foreach ($data['newFiles'] as $newFile) {
+					$objHostOnlyUrl = new \Purl\Url($urlHostOnly);
+					$objFullPathUrl = new \Purl\Url($urlFullPath);
+					$objHostOnlyUrl->path = $newFile;
+					$hostOnlyUrl = $objHostOnlyUrl->getUrl();
 
 
-				$pathSegments = explode('/', $newFile);
-				foreach ($pathSegments as $segment) {
-					$objFullPathUrl->path->add($segment);
-				}
-				$fullPathUrl = $objFullPathUrl->getUrl();
+					$pathSegments = explode('/', $newFile);
+					foreach ($pathSegments as $segment) {
+						$objFullPathUrl->path->add($segment);
+					}
+					$fullPathUrl = $objFullPathUrl->getUrl();
 
-				unset($objFullPathUrl, $objHostOnlyUrl);
+					unset($objFullPathUrl, $objHostOnlyUrl);
 
-				$objFetcher->setUrl($hostOnlyUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_HEAD, FALSE, FALSE);
-				$fetcherErrnoHostOnly = $objFetcher->getErrno();
-				$responseHttpCode = $objFetcher->getResponseHttpCode();
-				if ($fetcherErrnoHostOnly === 0 && $responseHttpCode === 200) {
-					$isClassificationSuccessful = TRUE;
-					$TYPO3version = $data['TYPO3version'];
-					break 2;
-				}
-
-				if (0 !== strcmp($hostOnlyUrl, $fullPathUrl)) {
-					$objFetcher->setUrl($fullPathUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_HEAD, FALSE, FALSE);
+					$objFetcher->setUrl($hostOnlyUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_HEAD, FALSE, FALSE);
 					$fetcherErrnoHostOnly = $objFetcher->getErrno();
 					$responseHttpCode = $objFetcher->getResponseHttpCode();
 					if ($fetcherErrnoHostOnly === 0 && $responseHttpCode === 200) {
@@ -240,7 +244,62 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 						$TYPO3version = $data['TYPO3version'];
 						break 2;
 					}
+
+					if (0 !== strcmp($hostOnlyUrl, $fullPathUrl)) {
+						$objFetcher->setUrl($fullPathUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_HEAD, FALSE, FALSE);
+						$fetcherErrnoHostOnly = $objFetcher->getErrno();
+						$responseHttpCode = $objFetcher->getResponseHttpCode();
+						if ($fetcherErrnoHostOnly === 0 && $responseHttpCode === 200) {
+							$isClassificationSuccessful = TRUE;
+							$TYPO3version = $data['TYPO3version'];
+							break 2;
+						}
+					}
 				}
+				unset($newFile);
+			}
+			if (!$isClassificationSuccessful && isset($data['filesize'])) {
+				foreach ($data['filesize'] as $newFile) {
+					reset($newFile);
+					$filesizePath = key($newFile);
+					$objHostOnlyUrl = new \Purl\Url($urlHostOnly);
+					$objFullPathUrl = new \Purl\Url($urlFullPath);
+					$objHostOnlyUrl->path = $filesizePath;
+					$hostOnlyUrl = $objHostOnlyUrl->getUrl();
+
+
+					$pathSegments = explode('/', $filesizePath);
+					foreach ($pathSegments as $segment) {
+						$objFullPathUrl->path->add($segment);
+					}
+					$fullPathUrl = $objFullPathUrl->getUrl();
+
+					unset($objFullPathUrl, $objHostOnlyUrl);
+
+					$objFetcher->setUrl($hostOnlyUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_HEAD, FALSE, FALSE);
+					$fetcherErrnoHostOnly = $objFetcher->getErrno();
+					$responseHttpCode = $objFetcher->getResponseHttpCode();
+					$contentLength = $objFetcher->getContentLength();
+					if ($fetcherErrnoHostOnly === 0 && $responseHttpCode === 200
+							&& $contentLength > 0 && $contentLength === $newFile[$filesizePath]) {
+						$isClassificationSuccessful = TRUE;
+						$TYPO3version = $data['TYPO3version'];
+						break 2;
+					}
+
+					if (0 !== strcmp($hostOnlyUrl, $fullPathUrl)) {
+						$objFetcher->setUrl($fullPathUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_HEAD, FALSE, FALSE);
+						$fetcherErrnoHostOnly = $objFetcher->getErrno();
+						$responseHttpCode = $objFetcher->getResponseHttpCode();
+						if ($fetcherErrnoHostOnly === 0 && $responseHttpCode === 200
+								&& $contentLength > 0 && $contentLength === $newFile[$filesizePath]) {
+							$isClassificationSuccessful = TRUE;
+							$TYPO3version = $data['TYPO3version'];
+							break 2;
+						}
+					}
+				}
+				unset($newFile);
 			}
 		}
 		unset($fingerprintData, $urlFullPath, $pathString, $path, $urlFullPath, $urlHostOnly, $objUrl, $objFetcher);
