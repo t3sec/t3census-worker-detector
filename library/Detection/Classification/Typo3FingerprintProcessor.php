@@ -59,13 +59,24 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 
 		$fingerprintData = array(
 			0 => array(
-				'TYPO3version' => 'TYPO3 7.3 CMS',
+				'TYPO3version' => 'TYPO3 7.6 CMS',
 				'newFiles' => array(
-						'typo3/sysext/t3skin/Resources/Public/Images/cropper-background.png',
-						'typo3/sysext/backend/Resources/Public/Images/BackendLayoutWizard/t3grid-layer-icon-close.png'
+					'typo3/sysext/backend/Resources/Public/Images/clear.gif',
+					'typo3/sysext/frontend/Resources/Public/Icons/FileIcons/default.gif',
+					'typo3/sysext/impexp/Resources/Public/Images/export.gif',
+					'typo3/sysext/rtehtmlarea/Resources/Public/Images/internal_link.gif',
+					'typo3/sysext/core/Resources/Public/Images/NotFound.png',
+					'typo3/sysext/backend/Resources/Public/Images/typo3-topbar@2x.png'
 				)
 			),
 			1 => array(
+				'TYPO3version' => 'TYPO3 7.3 CMS',
+				'newFiles' => array(
+					'typo3/sysext/t3skin/Resources/Public/Images/cropper-background.png',
+					'typo3/sysext/backend/Resources/Public/Images/BackendLayoutWizard/t3grid-layer-icon-close.png'
+				)
+			),
+			2 => array(
 				'TYPO3version' => 'TYPO3 7.0 CMS',
 				'newFiles' => array(
 					'typo3/contrib/jquery/jquery-1.11.1.js',
@@ -73,42 +84,42 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/contrib/swiftmailer/notes/rfc/rfc5751.txt'
 				)
 			),
-			2 => array(
+			3 => array(
 				'TYPO3version' => 'TYPO3 6.2 CMS',
 				'newFiles' => array(
 					'typo3/sysext/t3skin/Resources/Public/JavaScript/login.js',
 					'typo3/sysext/install/Resources/Public/Javascript/Install.js',
 				)
 			),
-			3 => array(
+			4 => array(
 				'TYPO3version' => 'TYPO3 6.1 CMS',
 				'newFiles' => array(
 					'typo3/contrib/requirejs/require.js',
 					'typo3/contrib/jquery/jquery-1.9.1.min.js',
 				)
 			),
-			4 => array(
+			5 => array(
 				'TYPO3version' => 'TYPO3 6.0 CMS',
 				'newFiles' => array(
 					'typo3/contrib/jquery/jquery-1.8.2.min.js',
 					'typo3/sysext/lang/Resources/Public/Contrib/jquery.dataTables-1.9.4.min.js',
 				)
 			),
-			5 => array(
+			6 => array(
 				'TYPO3version' => 'TYPO3 4.7 CMS',
 				'newFiles' => array(
 					'typo3/contrib/videojs/video-js/video.js',
 					'typo3/contrib/flowplayer/src/javascript/flowplayer.js/flowplayer-3.2.10.js',
 				)
 			),
-			6 => array(
+			7 => array(
 				'TYPO3version' => 'TYPO3 4.6 CMS',
 				'newFiles' => array(
 					'typo3/contrib/codemirror/contrib/scheme/js/parsescheme.js',
 					'typo3/sysext/css_styled_content/static/v4.5/setup.txt',
 				)
 			),
-			7 => array(
+			8 => array(
 				'TYPO3version' => 'TYPO3 4.5 CMS',
 				'newFiles' => array(
 					'typo3/js/livesearch.js',
@@ -117,7 +128,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/contrib/extjs/locale/ext-lang-am.js',
 				)
 			),
-			8 => array(
+			9 => array(
 				'TYPO3version' => 'TYPO3 4.4 CMS',
 				'newFiles' => array(
 					'typo3/js/pagetreefiltermenu.js',
@@ -125,7 +136,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/contrib/extjs/adapter/ext/ext-base-debug-w-comments.js',
 				)
 			),
-			9 => array(
+			10 => array(
 				'TYPO3version' => 'TYPO3 4.3 CMS',
 				'newFiles' => array(
 					't3lib/js/adminpanel.js',
@@ -134,7 +145,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/contrib/swfupload/swfupload.js',
 				)
 			),
-			10 => array(
+			11 => array(
 				'TYPO3version' => 'TYPO3 4.2 CMS',
 				'newFiles' => array(
 					'typo3/js/workspaces.js',
@@ -142,7 +153,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/templates/belog.html',
 				)
 			),
-			11 => array(
+			12 => array(
 				'TYPO3version' => 'TYPO3 4.1 CMS',
 				'newFiles' => array(
 					't3lib/jsfunc.inline.js',
@@ -151,7 +162,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/contrib/scriptaculous/scriptaculous.js',
 				)
 			),
-			12 => array(
+			13 => array(
 				'TYPO3version' => 'TYPO3 4.0 CMS',
 				'newFiles' => array(
 					'typo3/tab.js',
@@ -159,7 +170,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/sysext/cms/tslib/media/fileicons/folder.gif',
 				)
 			),
-			13 => array(
+			14 => array(
 				'TYPO3version' => 'TYPO3 3.8 CMS',
 				'newFiles' => array(
 					't3lib/gfx/up.gif',
@@ -167,7 +178,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/sysext/install/imgs/copyrights.txt',
 				)
 			),
-			14 => array(
+			15 => array(
 				'TYPO3version' => 'TYPO3 3.7 CMS',
 				'newFiles' => array(
 					'misc/locallang_XML_dummy.xml',
@@ -175,7 +186,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					'typo3/mod/help/cshmanual/ext_icon.gif',
 				)
 			),
-			15 => array(
+			16 => array(
 				'TYPO3version' => 'TYPO3 3.6 CMS',
 				'newFiles' => array(
 					'misc/changes_in_typo3-ext.diff.txt',
