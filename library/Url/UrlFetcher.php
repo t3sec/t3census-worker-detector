@@ -26,7 +26,7 @@ class UrlFetcher {
 
 	protected $body = NULL;
 
-	protected $userAgent = 'T3census-Crawler/1.0 (+http://t3census.info/)';
+	protected $userAgent = 'T3census-Crawler/1.1 (+http://t3census.info/)';
 
 	public function __construct() {
 		$this->reset();
