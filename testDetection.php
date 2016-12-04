@@ -36,6 +36,7 @@ $context->setUrl('http://www.colleen-rae-holmes.com/index.php');
 $context->setUrl('http://www.maasdamgroep.nl/foo');
 $context->setUrl('http://www.foreverknowledge.info');
 
+$context->setUrl('https://storm.torproject.org');
 
 
 $objTypo3Artefacts = new \T3census\Detection\Identification\Typo3ArtefactsProcessor(NULL, TRUE);

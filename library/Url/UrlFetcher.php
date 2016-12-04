@@ -48,6 +48,7 @@ class UrlFetcher {
 		}
 
 		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
 		curl_setopt($curl, CURLOPT_URL, $this->url);
 		curl_setopt($curl, CURLOPT_POST, FALSE);
 		curl_setopt($curl, CURLOPT_TIMEOUT, 20);
