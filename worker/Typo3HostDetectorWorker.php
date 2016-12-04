@@ -17,7 +17,16 @@ require_once $libraryDir . '/Detection/Classification/Typo3ArtefactsProcessor.ph
 require_once $libraryDir . '/Detection/Classification/Typo3FingerprintProcessor.php';
 require_once $vendorDir . '/autoload.php';
 
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
+$logfile = __DIR__ . '/../t3census-worker-detector.log';
+
+
+// create a log channel
+$logger = new Logger('t3census-worker-detector');
+$logger->pushHandler(new StreamHandler($logfile, Logger::WARNING));
+//TODO graylog
 
 $worker = new GearmanWorker();
 $worker->addServer('127.0.0.1', 4730);
@@ -44,10 +53,14 @@ while (1) {
 
 
 function fetchUrl(GearmanJob $job) {
+	global $logger;
+
 	$result = array();
 
 	$context = new \T3census\Detection\Context();
 	$context->setUrl($job->workload());
+
+	$logger->addDebug('Processing URL', array('url' => $job->workload()));
 
 	$objTypo3Artefacts = new \T3census\Detection\Identification\Typo3ArtefactsProcessor(NULL, TRUE);
 	$objPathRedirect = new \T3census\Detection\Identification\FullPathProcessor($objTypo3Artefacts, TRUE);
@@ -82,6 +95,14 @@ function fetchUrl(GearmanJob $job) {
 	$result['path'] = (is_string($path) && strlen($path) > 0 && 0 !== strcmp('/', $path) ? $path : NULL);
 	$result['TYPO3'] = (is_bool($context->getIsTypo3Cms()) && $context->getIsTypo3Cms());
 	$result['TYPO3version'] = $context->getTypo3VersionString();
+
+	if (is_bool($context->getIsTypo3Cms()) && $context->getIsTypo3Cms()) {
+		$logger->addInfo('Discovered TYPO3 CMS',
+						array(
+							'url' => $job->workload(),
+							'version' => $context->getTypo3VersionString()));
+	}
+
 	unset($objUrl, $context);
 
 	return json_encode($result);
