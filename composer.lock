@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "51361b688a4821eb574b10d383256f36",
-    "content-hash": "a870b5ae7d5491d34585fffa810a1c0f",
+    "hash": "4517458e83140720bc549065f27605b0",
+    "content-hash": "1fe7d1d0a57898f6331d163b764eb93d",
     "packages": [
         {
             "name": "graylog2/gelf-php",
@@ -325,17 +325,61 @@
             "time": "2016-10-10 12:19:37"
         },
         {
+            "name": "t3sec/typo3cms-detection",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/t3sec/php-library-typo3cms-detection.git",
+                "reference": "9d9fb8fe44bd291489d24e597acbb59fa882ebbc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/t3sec/php-library-typo3cms-detection/zipball/9d9fb8fe44bd291489d24e597acbb59fa882ebbc",
+                "reference": "9d9fb8fe44bd291489d24e597acbb59fa882ebbc",
+                "shasum": ""
+            },
+            "require": {
+                "jwage/purl": "0.0.7",
+                "t3sec/urlhelper": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "T3sec\\Typo3Cms\\Detection\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcus Krause",
+                    "email": "marcus#exp2017@t3sec.info"
+                }
+            ],
+            "description": "a PHP library to detect TYPO3 CMS sites",
+            "homepage": "https://github.com/t3sec/php-library-typo3cms-detection",
+            "keywords": [
+                "typo3-cms"
+            ],
+            "support": {
+                "source": "https://github.com/t3sec/php-library-typo3cms-detection/tree/master",
+                "issues": "https://github.com/t3sec/php-library-typo3cms-detection/issues"
+            },
+            "time": "2017-02-03 19:48:51"
+        },
+        {
             "name": "t3sec/urlhelper",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/t3sec/php-library-helper-url.git",
-                "reference": "ed8ba1aa8d0b2c1c9d42028ab1a3b067f3dcc18b"
+                "reference": "944a5a25c58cd2d15b5d6ef7af337f640be1e648"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/t3sec/php-library-helper-url/zipball/ed8ba1aa8d0b2c1c9d42028ab1a3b067f3dcc18b",
-                "reference": "ed8ba1aa8d0b2c1c9d42028ab1a3b067f3dcc18b",
+                "url": "https://api.github.com/repos/t3sec/php-library-helper-url/zipball/944a5a25c58cd2d15b5d6ef7af337f640be1e648",
+                "reference": "944a5a25c58cd2d15b5d6ef7af337f640be1e648",
                 "shasum": ""
             },
             "type": "library",
@@ -364,14 +408,15 @@
                 "source": "https://github.com/t3sec/php-library-helper-url/tree/master",
                 "issues": "https://github.com/t3sec/php-library-helper-url/issues"
             },
-            "time": "2017-02-02 10:38:50"
+            "time": "2017-02-03 16:36:16"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "t3sec/urlhelper": 20
+        "t3sec/urlhelper": 20,
+        "t3sec/typo3cms-detection": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

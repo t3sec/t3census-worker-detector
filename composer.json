@@ -19,6 +19,10 @@
     {
       "type": "vcs",
       "url": "https://github.com/t3sec/php-library-helper-url"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/t3sec/php-library-typo3cms-detection"
     }
   ],
   "require": {
@@ -26,6 +30,7 @@
     "necromant2005/gearman-stats": "1.2.1",
     "monolog/monolog": "^1.22",
     "graylog2/gelf-php": "^1.5",
-    "t3sec/urlhelper": "dev-master"
+    "t3sec/urlhelper": "dev-master",
+    "t3sec/typo3cms-detection": "dev-master"
   }
 }
