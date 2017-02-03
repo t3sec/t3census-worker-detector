@@ -1,15 +1,14 @@
 <?php
 namespace T3census\Detection\Classification;
 
+use T3sec\Url\UrlFetcher;
+
 $dir = dirname(__FILE__);
 $libraryDir = realpath($dir . '/../../../library');
-$vendorDir = realpath($dir . '/../../../vendor');
 
 require_once $libraryDir . '/Detection/AbstractProcessor.php';
 require_once $libraryDir . '/Detection/ProcessorInterface.php';
 require_once $libraryDir . '/Detection/DomParser.php';
-require_once $libraryDir . '/Url/UrlFetcher.php';
-require_once $vendorDir . '/autoload.php';
 
 
 class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor implements \T3census\Detection\ProcessorInterface {
@@ -34,7 +33,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 	public function process(\T3census\Detection\Context $context) {
 		$isClassificationSuccessful = FALSE;
 
-		$objFetcher = new \T3census\Url\UrlFetcher();
+		$objFetcher = new UrlFetcher();
 		$objUrl = \Purl\Url::parse($context->getUrl());
 
 		$urlHostOnly = $objUrl->get('scheme') . '://' . $objUrl->get('host');
@@ -250,7 +249,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 
 					unset($objFullPathUrl, $objHostOnlyUrl);
 
-					$objFetcher->setUrl($hostOnlyUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_HEAD, FALSE, FALSE);
+					$objFetcher->setUrl($hostOnlyUrl)->fetchUrl(UrlFetcher::HTTP_HEAD, FALSE, FALSE);
 					$fetcherErrnoHostOnly = $objFetcher->getErrno();
 					$responseHttpCode = $objFetcher->getResponseHttpCode();
 					if ($fetcherErrnoHostOnly === 0 && $responseHttpCode === 200) {
@@ -260,7 +259,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					}
 
 					if (0 !== strcmp($hostOnlyUrl, $fullPathUrl)) {
-						$objFetcher->setUrl($fullPathUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_HEAD, FALSE, FALSE);
+						$objFetcher->setUrl($fullPathUrl)->fetchUrl(UrlFetcher::HTTP_HEAD, FALSE, FALSE);
 						$fetcherErrnoHostOnly = $objFetcher->getErrno();
 						$responseHttpCode = $objFetcher->getResponseHttpCode();
 						if ($fetcherErrnoHostOnly === 0 && $responseHttpCode === 200) {
@@ -290,7 +289,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 
 					unset($objFullPathUrl, $objHostOnlyUrl);
 
-					$objFetcher->setUrl($hostOnlyUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_HEAD, FALSE, FALSE);
+					$objFetcher->setUrl($hostOnlyUrl)->fetchUrl(UrlFetcher::HTTP_HEAD, FALSE, FALSE);
 					$fetcherErrnoHostOnly = $objFetcher->getErrno();
 					$responseHttpCode = $objFetcher->getResponseHttpCode();
 					$contentLength = $objFetcher->getContentLength();
@@ -302,7 +301,7 @@ class Typo3FingerprintProcessor extends \T3census\Detection\AbstractProcessor im
 					}
 
 					if (0 !== strcmp($hostOnlyUrl, $fullPathUrl)) {
-						$objFetcher->setUrl($fullPathUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_HEAD, FALSE, FALSE);
+						$objFetcher->setUrl($fullPathUrl)->fetchUrl(UrlFetcher::HTTP_HEAD, FALSE, FALSE);
 						$fetcherErrnoHostOnly = $objFetcher->getErrno();
 						$responseHttpCode = $objFetcher->getResponseHttpCode();
 						if ($fetcherErrnoHostOnly === 0 && $responseHttpCode === 200

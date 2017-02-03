@@ -1,16 +1,14 @@
 <?php
 namespace T3census\Detection\Identification;
 
+use T3sec\Url\UrlFetcher;
 
 $dir = dirname(__FILE__);
 $libraryDir = realpath($dir . '/../../../library');
-$vendorDir = realpath($dir . '/../../../vendor');
 
 require_once $libraryDir . '/Detection/AbstractProcessor.php';
 require_once $libraryDir . '/Detection/ProcessorInterface.php';
 require_once $libraryDir . '/Detection/DomParser.php';
-require_once $libraryDir . '/Url/UrlFetcher.php';
-require_once $vendorDir . '/autoload.php';
 
 
 class Typo3ArtefactsProcessor extends \T3census\Detection\AbstractProcessor implements \T3census\Detection\ProcessorInterface {
@@ -37,7 +35,7 @@ class Typo3ArtefactsProcessor extends \T3census\Detection\AbstractProcessor impl
 		$isIdentificationSuccessful = FALSE;
 
 		$objRequest = new \T3census\Detection\Request();
-		$objFetcher = new \T3census\Url\UrlFetcher();
+		$objFetcher = new UrlFetcher();
 		$objUrl = \Purl\Url::parse($context->getUrl());
 
 		$urlHostOnly = $objUrl->get('scheme') . '://' . $objUrl->get('host');
@@ -71,21 +69,21 @@ class Typo3ArtefactsProcessor extends \T3census\Detection\AbstractProcessor impl
 		$objFileadminUrl = new \Purl\Url($urlHostOnly);
 		$objFileadminUrl->path = 'fileadmin/';
 		$fileadminUrl = $objFileadminUrl->getUrl();
-		$objFetcher->setUrl($fileadminUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_GET, FALSE, FALSE);
+		$objFetcher->setUrl($fileadminUrl)->fetchUrl(UrlFetcher::HTTP_GET, FALSE, FALSE);
 		$fetcherHttpCodeFileadmin = $objFetcher->getResponseHttpCode();
 		$fetcherErrnoFileadmin = $objFetcher->getErrno();
 
 		$objSysextUrl = new \Purl\Url($urlHostOnly);
 		$objSysextUrl->path = 'typo3/sysext/';
 		$sysextUrl = $objSysextUrl->getUrl();
-		$objFetcher->reset()->setUrl($sysextUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_GET, FALSE, FALSE);
+		$objFetcher->reset()->setUrl($sysextUrl)->fetchUrl(UrlFetcher::HTTP_GET, FALSE, FALSE);
 		$fetcherHttpCodeSysext = $objFetcher->getResponseHttpCode();
 		$fetcherErrnoSysext = $objFetcher->getErrno();
 
 		$objRandomUrl = new \Purl\Url($urlHostOnly);
 		$objRandomUrl->path = md5(time()) . '/';
 		$randomUrl = $objRandomUrl->getUrl();
-		$objFetcher->reset()->setUrl($randomUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_GET, FALSE, FALSE);
+		$objFetcher->reset()->setUrl($randomUrl)->fetchUrl(UrlFetcher::HTTP_GET, FALSE, FALSE);
 		$fetcherHttpCodeRandom = $objFetcher->getResponseHttpCode();
 		$fetcherErrnoRandom = $objFetcher->getErrno();
 
@@ -107,21 +105,21 @@ class Typo3ArtefactsProcessor extends \T3census\Detection\AbstractProcessor impl
 				$objFileadminUrl = new \Purl\Url($urlFullPath);
 				$objFileadminUrl->path->add('fileadmin/');
 				$fileadminUrl = $objFileadminUrl->getUrl();
-				$objFetcher->setUrl($fileadminUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_GET, FALSE, FALSE);
+				$objFetcher->setUrl($fileadminUrl)->fetchUrl(UrlFetcher::HTTP_GET, FALSE, FALSE);
 				$fetcherHttpCodeFileadmin = $objFetcher->getResponseHttpCode();
 				$fetcherErrnoFileadmin = $objFetcher->getErrno();
 
 				$objSysextUrl = new \Purl\Url($urlFullPath);
 				$objSysextUrl->path->add('typo3/sysext/');
 				$sysextUrl = $objSysextUrl->getUrl();
-				$objFetcher->reset()->setUrl($sysextUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_GET, FALSE, FALSE);
+				$objFetcher->reset()->setUrl($sysextUrl)->fetchUrl(UrlFetcher::HTTP_GET, FALSE, FALSE);
 				$fetcherHttpCodeSysext = $objFetcher->getResponseHttpCode();
 				$fetcherErrnoSysext = $objFetcher->getErrno();
 
 				$objRandomUrl = new \Purl\Url($urlFullPath);
 				$objRandomUrl->path->add(md5(time()) . '/');
 				$randomUrl = $objRandomUrl->getUrl();
-				$objFetcher->reset()->setUrl($randomUrl)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_GET, FALSE, FALSE);
+				$objFetcher->reset()->setUrl($randomUrl)->fetchUrl(UrlFetcher::HTTP_GET, FALSE, FALSE);
 				$fetcherHttpCodeRandom = $objFetcher->getResponseHttpCode();
 				$fetcherErrnoRandom = $objFetcher->getErrno();
 

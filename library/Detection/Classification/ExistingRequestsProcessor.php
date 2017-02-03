@@ -4,12 +4,10 @@ namespace T3census\Detection\Classification;
 
 $dir = dirname(__FILE__);
 $libraryDir = realpath($dir . '/../../../library');
-$vendorDir = realpath($dir . '/../../../vendor');
 
 require_once $libraryDir . '/Detection/AbstractProcessor.php';
 require_once $libraryDir . '/Detection/ProcessorInterface.php';
 require_once $libraryDir . '/Detection/DomParser.php';
-require_once $vendorDir . '/autoload.php';
 
 
 class ExistingRequestsProcessor extends \T3census\Detection\AbstractProcessor implements \T3census\Detection\ProcessorInterface {

@@ -1,16 +1,15 @@
 <?php
 namespace T3census\Detection\Normalization;
 
+use T3sec\Url\UrlFetcher;
+
 
 $dir = dirname(__FILE__);
 $libraryDir = realpath($dir . '/../../../library');
-$vendorDir = realpath($dir . '/../../../vendor');
 
 require_once $libraryDir . '/Detection/AbstractProcessor.php';
 require_once $libraryDir . '/Detection/ProcessorInterface.php';
 require_once $libraryDir . '/Detection/DomParser.php';
-require_once $libraryDir . '/Url/UrlFetcher.php';
-require_once $vendorDir . '/autoload.php';
 
 
 class RedirectProcessor extends \T3census\Detection\AbstractProcessor implements \T3census\Detection\ProcessorInterface {
@@ -53,8 +52,8 @@ class RedirectProcessor extends \T3census\Detection\AbstractProcessor implements
 		$urlOriginHost = $objOriginUrl->get('host');
 		$urlOriginScheme = $objOriginUrl->get('scheme');
 
-		$objFetcher = new \T3census\Url\UrlFetcher();
-		$objFetcher->setUrl($context->getUrl())->fetchUrl(\T3census\Url\UrlFetcher::HTTP_HEAD, FALSE, $this->allowRedirect);
+		$objFetcher = new UrlFetcher();
+		$objFetcher->setUrl($context->getUrl())->fetchUrl(UrlFetcher::HTTP_HEAD, FALSE, $this->allowRedirect);
 
 		if ($objFetcher->getErrno() === 0 && $objFetcher->getNumRedirects() > 0) {
 			$objUrl = $objOriginUrl;

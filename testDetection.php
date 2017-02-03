@@ -1,7 +1,8 @@
 <?php
+require_once __DIR__.'/vendor/autoload.php';
+
 $dir = dirname(__FILE__);
 $libraryDir = realpath($dir . '/library');
-$vendorDir = realpath($dir . '/vendor');
 
 require_once $libraryDir . '/Detection/Context.php';
 require_once $libraryDir . '/Detection/Request.php';

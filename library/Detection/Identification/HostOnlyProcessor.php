@@ -1,16 +1,15 @@
 <?php
 namespace T3census\Detection\Identification;
 
+use T3sec\Url\UrlFetcher;
+
 
 $dir = dirname(__FILE__);
 $libraryDir = realpath($dir . '/../../../library');
-$vendorDir = realpath($dir . '/../../../vendor');
 
 require_once $libraryDir . '/Detection/AbstractProcessor.php';
 require_once $libraryDir . '/Detection/ProcessorInterface.php';
 require_once $libraryDir . '/Detection/DomParser.php';
-require_once $libraryDir . '/Url/UrlFetcher.php';
-require_once $vendorDir . '/autoload.php';
 
 
 class HostOnlyProcessor extends \T3census\Detection\AbstractProcessor implements \T3census\Detection\ProcessorInterface {
@@ -51,11 +50,11 @@ class HostOnlyProcessor extends \T3census\Detection\AbstractProcessor implements
 		$isIdentificationSuccessful = FALSE;
 
 		$objRequest = new \T3census\Detection\Request();
-		$objFetcher = new \T3census\Url\UrlFetcher();
+		$objFetcher = new UrlFetcher();
 		$objUrl = \Purl\Url::parse($context->getUrl());
 
 		$urlHostOnly = $objUrl->get('scheme') . '://' . $objUrl->get('host');
-		$objFetcher->setUrl($urlHostOnly)->fetchUrl(\T3census\Url\UrlFetcher::HTTP_GET, TRUE, $this->allowRedirect);
+		$objFetcher->setUrl($urlHostOnly)->fetchUrl(UrlFetcher::HTTP_GET, TRUE, $this->allowRedirect);
 		$objRequest->setRequestUrl($urlHostOnly)->setResponseUrl($urlHostOnly);
 
 		if ($objFetcher->getErrno() === 0) {

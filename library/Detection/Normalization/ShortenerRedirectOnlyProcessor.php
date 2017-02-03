@@ -4,13 +4,10 @@ namespace T3census\Detection\Normalization;
 
 $dir = dirname(__FILE__);
 $libraryDir = realpath($dir . '/../../../library');
-$vendorDir = realpath($dir . '/../../../vendor');
 
 require_once $libraryDir . '/Detection/AbstractProcessor.php';
 require_once $libraryDir . '/Detection/ProcessorInterface.php';
 require_once $libraryDir . '/Detection/DomParser.php';
-require_once $libraryDir . '/Url/UrlFetcher.php';
-require_once $vendorDir . '/autoload.php';
 
 
 class ShortenerRedirectOnlyProcessor extends \T3census\Detection\AbstractProcessor implements \T3census\Detection\ProcessorInterface {
